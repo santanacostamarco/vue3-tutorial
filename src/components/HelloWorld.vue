@@ -1,20 +1,37 @@
 <template>
-  <h1>{{ msg }}</h1>
-  <button @click="count++">count is: {{ count }}</button>
-  <p>Edit <code>components/HelloWorld.vue</code> to test hot module replacement.</p>
-  <h3>This is f*cking AWESOME</h3>
+  <h1>Search articles from LearnVue</h1>
+  <div>
+    <input 
+      type="text"
+      placeholder="Search for articles"
+      v-model="query"
+    />
+    <button @click="reset"> Reset </button>  
+   </div>
+   <search-results :query="query"/>
 </template>
 
 <script>
+import { ref } from 'vue';
+import SearchResults from './SearchResults.vue';
+
 export default {
-  name: 'HelloWorld',
-  props: {
-    msg: String
+  components: {
+    SearchResults
   },
-  data() {
+
+  setup () {
+    const query = ref('');
+
+    const reset = () => {
+      query.value = '';
+    }
+
     return {
-      count: 0
+      query,
+      reset
     }
   }
 }
+
 </script>
